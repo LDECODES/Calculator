@@ -1,1 +1,26 @@
+body {
+    background-color: black;
+}
 
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: bisque;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.calculator {
+    display: flex;
+   
+    height: 480px;
+    width: 300px;
+    border: 4px solid white;
+
+
+}
+
+.screen {
+    height: 75px;
+    width: 200px;
+}
