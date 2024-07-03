@@ -1,6 +1,10 @@
 body {
-    
-   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ensure the body takes the full viewport height */
+    margin: 0; /* Remove default margin */
+    flex-direction: column;
 }
 
 h1 {
@@ -12,16 +16,20 @@ h1 {
 
 .calculator {
     display: flex;
-    justify-content: center;
-    justify-self: center;
-    align-items: center;
     flex-wrap: wrap;
+    justify-content: center;
     border: 4px solid black;
     height: 550px; 
     width: 500px;
     
 
 
+}
+
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    
 }
 
 .screen {
@@ -32,7 +40,7 @@ h1 {
     justify-content: flex-end;
     align-items: center;
     font-weight: bolder;
-    font-size: x-small;
+    font-size: xx-large;
 }
 
 button {
