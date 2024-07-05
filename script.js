@@ -1,30 +1,41 @@
 document.addEventListener("DOMContentLoaded", function() {
 let firstNumber = 0;
-let operator = 0;
+let operator = "?";
 let lastNumber = 0;
+
+let answer = 0;
+let status = "unchanged"
 
 let screen = document.querySelector('.screen')
 
+screen.textContent = `${firstNumber}  ?  ${lastNumber}` 
 
 
 
 
 
 
-function add(){
-
+function add(a, b){
+    answer =  a + b
+    return answer
 }
-function subtract(){
-
+function subtract(a, b){
+ answer = a - b
+ return answer
 }
 function multiply(){
-
+ answer = a * b
+ return answer
 }
-function divide(){
+function divide(a, b){
+answer = a / b
+return answer;
 
 }
 
 function operate(a, o , b){
+    o = operator
+
     if(o = '+'){
         add()
     }else if (o = '-') {
@@ -41,60 +52,136 @@ function operate(a, o , b){
 }
 
 function display(){
-    
+    screen.textContent = `${firstNumber}  ${operator}  ${lastNumber}`
 }
+
+function clear() {
+    screen.textContent = "0  ?  0"
+
+};
 
 document.querySelectorAll('button').forEach(button => {
     button.addEventListener("click", function(event) {
     const target = event.target;
     switch (target.id) {
         case "1":
-        console.log('hello');
+        if (status === "unchanged") {
+         firstNumber = target.id
+         status = "changed"
+        }else {
+            lastNumber = target.id
+        }
+        display();
+
             break;
         case "2":
-            console.log('hello');
+            if (status === "unchanged") {
+                firstNumber = target.id
+                status = "changed"
+               }else {
+                   lastNumber = target.id
+               }
+               display()
             break;
         case '3':
-            console.log('hello');
+            if (status === "unchanged") {
+                firstNumber = target.id
+                status = "changed"
+               }else {
+                   lastNumber = target.id
+               }
+               display()
             break;
         case '4':
-            console.log('hello');
+            if (status === "unchanged") {
+                firstNumber = target.id
+                status = "changed"
+               }else {
+                   lastNumber = target.id
+               }
+               display()
             break;
         case '5':
-            console.log('hello');
+            if (status === "unchanged") {
+                firstNumber = target.id
+                status = "changed"
+               }else {
+                   lastNumber = target.id
+               }
+               display()
             break;
         case '6':
-            console.log('hello');
+            if (status === "unchanged") {
+                firstNumber = target.id
+                status = "changed"
+               }else {
+                   lastNumber = target.id
+               }
+               display()
             break;
         case '7':
-            console.log('hello');
+            if (status === "unchanged") {
+                firstNumber = target.id
+                status = "changed"
+               }else {
+                   lastNumber = target.id
+               }
+               display()
             break;
         case '8':
-
+            if (status === "unchanged") {
+                firstNumber = target.id
+                status = "changed"
+               }else {
+                   lastNumber = target.id
+               }
+               display()
             break;
         case '9':
-
+            console.log('hello')
+            if (status === "unchanged") {
+                firstNumber = target.id
+                status = "changed"
+               }else {
+                   lastNumber = target.id
+               }
+               display()
             break;
         case '0':
+            if (status === "unchanged") {
+                firstNumber = target.id
+                status = "changed"
+               }else {
+                   lastNumber = target.id
+               }
+               display()
 
             break;
         case '+':
-
+            operator = target.id
+            display()
             break;
         case '-':
-
+            operator = target.id
+            display()
             break;
         case 'x':
-
+            operator = target.id
+            display()
             break;
         case '/':
-
+            operator = target.id
+            display()
             break;
         case 'clear':
+            clear()
             break;
+        case '=':
+            operate()
+            break
         
         default: 
-        console.log('happy')
+        console.log('something went wrong')
 
     };
   });
