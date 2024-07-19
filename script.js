@@ -1,14 +1,27 @@
 document.addEventListener("DOMContentLoaded", function() {
+let equationOb = {
+    firstNumber : [],
+    operator : "",
+    lastNumber : []
+
+}
+
 let firstNumber = 0;
-let operator = "?";
+let  firstOperator= "";
+let secondOperator
 let lastNumber = 0;
+let equation = ``;
+
 
 let answer = 0;
-let status = "unchanged"
+let firstOperatorC = false ;
+let secondOperatorC = false;
+let firstNumberC = false;
+let lastNumberC = false;
+
 
 let screen = document.querySelector('.screen')
 
-screen.textContent = `${firstNumber}  ?  ${lastNumber}` 
 
 
 
@@ -51,12 +64,12 @@ function operate(a, o , b){
 
 }
 
-function display(){
-    screen.textContent = `${firstNumber}  ${operator}  ${lastNumber}`
+function display(equation){
+   screen.textContent = `${equation}`
 }
 
 function clear() {
-    screen.textContent = "0  ?  0"
+ screen.textContent = "";
 
 };
 
@@ -65,112 +78,110 @@ document.querySelectorAll('button').forEach(button => {
     const target = event.target;
     switch (target.id) {
         case "1":
-        if (status === "unchanged") {
-         firstNumber = target.id
-         status = "changed"
-        }else {
-            lastNumber = target.id
-        }
-        display();
+            if (firstNumberC = false) {
+                equationOb.firstNumber.push(target.id)
+                equation = `$`
+            
+                }else {
+                 equationOb.lastNumber.push(target.id) 
+                }
+                display()
 
             break;
         case "2":
-            if (status === "unchanged") {
-                firstNumber = target.id
-                status = "changed"
-               }else {
-                   lastNumber = target.id
-               }
-               display()
+            if (firstNumberC = false) {
+                equationOb.firstNumber.push(target.id)
+                }else {
+                 equationOb.lastNumber.push(target.id) 
+                }
+                display()
             break;
         case '3':
-            if (status === "unchanged") {
-                firstNumber = target.id
-                status = "changed"
+            if (firstNumberC = false) {
+               equationOb.firstNumber.push(target.id)
                }else {
-                   lastNumber = target.id
+                equationOb.lastNumber.push(target.id) 
                }
                display()
             break;
         case '4':
-            if (status === "unchanged") {
-                firstNumber = target.id
-                status = "changed"
-               }else {
-                   lastNumber = target.id
-               }
-               display()
+            if (firstNumberC = false) {
+                equationOb.firstNumber.push(target.id)
+                }else {
+                 equationOb.lastNumber.push(target.id) 
+                }
+                display()
             break;
         case '5':
-            if (status === "unchanged") {
-                firstNumber = target.id
-                status = "changed"
-               }else {
-                   lastNumber = target.id
-               }
-               display()
+            if (firstNumberC = false) {
+                equationOb.firstNumber.push(target.id)
+                }else {
+                 equationOb.lastNumber.push(target.id) 
+                }
+                display()
             break;
         case '6':
-            if (status === "unchanged") {
-                firstNumber = target.id
-                status = "changed"
-               }else {
-                   lastNumber = target.id
-               }
-               display()
+            if (firstNumberC = false) {
+                equationOb.firstNumber.push(target.id)
+                }else {
+                 equationOb.lastNumber.push(target.id) 
+                }
+                display()
+                console.log(equationOb.firstNumber)
             break;
         case '7':
-            if (status === "unchanged") {
-                firstNumber = target.id
-                status = "changed"
-               }else {
-                   lastNumber = target.id
-               }
-               display()
+            if (firstNumberC = false) {
+                equationOb.firstNumber.push(target.id)
+                }else {
+                 equationOb.lastNumber.push(target.id) 
+                }
+                display()
             break;
         case '8':
-            if (status === "unchanged") {
-                firstNumber = target.id
-                status = "changed"
-               }else {
-                   lastNumber = target.id
-               }
-               display()
+            if (firstNumberC = false) {
+                equationOb.firstNumber.push(target.id)
+                }else {
+                 equationOb.lastNumber.push(target.id) 
+                }
+                display()
             break;
         case '9':
-            console.log('hello')
-            if (status === "unchanged") {
-                firstNumber = target.id
-                status = "changed"
-               }else {
-                   lastNumber = target.id
-               }
-               display()
+            if (firstNumberC = false) {
+                equationOb.firstNumber.push(target.id)
+                }else {
+                 equationOb.lastNumber.push(target.id) 
+                }
+                display()
             break;
         case '0':
-            if (status === "unchanged") {
-                firstNumber = target.id
-                status = "changed"
-               }else {
-                   lastNumber = target.id
-               }
-               display()
+            if (firstNumberC = false) {
+                equationOb.firstNumber.push(target.id)
+                }else {
+                 equationOb.lastNumber.push(target.id) 
+
+                }
+                display()
 
             break;
         case '+':
-            operator = target.id
+            equationOb.operator = target.id
+            status = "changed"
             display()
             break;
         case '-':
-            operator = target.id
+            equationOb.operator = target.id
+            status = "changed"
             display()
-            break;
+            break
         case 'x':
-            operator = target.id
+            equationOb.operator = target.id
+            status = "changed"
             display()
             break;
         case '/':
-            operator = target.id
+            equationOb.operator = target.id
+            status = "changed"
+            console.log(equationOb.operator)
             display()
             break;
         case 'clear':
