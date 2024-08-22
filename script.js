@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
 let equationOb = {
     firstNumber : [],
-    operator : "",
-    lastNumber : []
+    firstOperator : "",
+    lastNumber : [],
+    secondOperator : ""
 
 }
 
@@ -47,7 +48,7 @@ return answer;
 }
 
 function operate(a, o , b){
-    o = operator
+    
 
     if(o = '+'){
         add()
@@ -78,95 +79,140 @@ document.querySelectorAll('button').forEach(button => {
     const target = event.target;
     switch (target.id) {
         case "1":
-            if (firstNumberC = false) {
+            if (!firstNumberC) {
                 equationOb.firstNumber.push(target.id)
-                equation = `$`
+                let first = equationOb.firstNumber.join(" ")
+                console.log(first)
+                firstNumberC = true
+                equation = `${first}`
+
+                
             
                 }else {
                  equationOb.lastNumber.push(target.id) 
+                 lastNumberC = true
+                 let second = equationOb.lastNumber.join()
+            
+                equation = `${second}`
                 }
-                display()
+                display(equation)
 
             break;
         case "2":
             if (firstNumberC = false) {
                 equationOb.firstNumber.push(target.id)
+                firstNumberC = true
+                
+            
                 }else {
                  equationOb.lastNumber.push(target.id) 
+                 lastNumberC = true
                 }
                 display()
             break;
         case '3':
             if (firstNumberC = false) {
-               equationOb.firstNumber.push(target.id)
-               }else {
-                equationOb.lastNumber.push(target.id) 
-               }
-               display()
+                equationOb.firstNumber.push(target.id)
+                firstNumberC = true
+                
+            
+                }else {
+                 equationOb.lastNumber.push(target.id) 
+                 lastNumberC = true
+                }
+                display()
             break;
         case '4':
             if (firstNumberC = false) {
                 equationOb.firstNumber.push(target.id)
+                firstNumberC = true
+                
+            
                 }else {
                  equationOb.lastNumber.push(target.id) 
+                 lastNumberC = true
                 }
                 display()
             break;
         case '5':
             if (firstNumberC = false) {
                 equationOb.firstNumber.push(target.id)
+                firstNumberC = true
+                
+            
                 }else {
                  equationOb.lastNumber.push(target.id) 
+                 lastNumberC = true
                 }
                 display()
             break;
         case '6':
             if (firstNumberC = false) {
                 equationOb.firstNumber.push(target.id)
+                firstNumberC = true
+                
+            
                 }else {
                  equationOb.lastNumber.push(target.id) 
+                 lastNumberC = true
                 }
                 display()
-                console.log(equationOb.firstNumber)
             break;
         case '7':
             if (firstNumberC = false) {
                 equationOb.firstNumber.push(target.id)
+                firstNumberC = true
+                
+            
                 }else {
                  equationOb.lastNumber.push(target.id) 
+                 lastNumberC = true
                 }
                 display()
             break;
         case '8':
             if (firstNumberC = false) {
                 equationOb.firstNumber.push(target.id)
+                firstNumberC = true
+                
+            
                 }else {
                  equationOb.lastNumber.push(target.id) 
+                 lastNumberC = true
                 }
                 display()
             break;
         case '9':
             if (firstNumberC = false) {
                 equationOb.firstNumber.push(target.id)
+                firstNumberC = true
+                
+            
                 }else {
                  equationOb.lastNumber.push(target.id) 
+                 lastNumberC = true
                 }
                 display()
             break;
         case '0':
             if (firstNumberC = false) {
                 equationOb.firstNumber.push(target.id)
+                firstNumberC = true
+                
+            
                 }else {
                  equationOb.lastNumber.push(target.id) 
-
+                 lastNumberC = true
                 }
                 display()
 
             break;
         case '+':
-            equationOb.operator = target.id
-            status = "changed"
-            display()
+            if (firstOperatorC = false) {
+                equationOb.firstOperator = target.id
+            }else {
+                equationOb.secondOperator = target.id
+            }
             break;
         case '-':
             equationOb.operator = target.id
@@ -181,7 +227,7 @@ document.querySelectorAll('button').forEach(button => {
         case '/':
             equationOb.operator = target.id
             status = "changed"
-            console.log(equationOb.operator)
+            
             display()
             break;
         case 'clear':
