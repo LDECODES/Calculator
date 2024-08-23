@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+i1document.addEventListener("DOMContentLoaded", function() {
 let equationOb = {
     firstNumber : [],
     firstOperator : "",
