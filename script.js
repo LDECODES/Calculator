@@ -4,7 +4,8 @@ document.addEventListener("DOMContentLoaded", function() {
     let pScreen = document.querySelector('.primary-screen')
     let sScreen = document.querySelector('.secondary-screen')
     let savedEquation = ''
-    let savedScreen
+    let savedScreen = ""
+    let equationArray = []
     let equation = {
         firstNumber: [],
         secondNumber: [],
@@ -80,7 +81,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 clear()
                 break
             case 'Del':
-                del()
+                let newEquation = del()
+                display(newEquation)
                 break
             case '.':
                 value = target.id
@@ -126,7 +128,8 @@ document.addEventListener("DOMContentLoaded", function() {
         let firstOperator = equation.firstOperator
         let secondOperator = equation.secondOperator
 
-
+        equationArray.push(firstNumber, firstOperator, secondNumber, secondOperator )
+        let joinedEquation = equationArray.join(' ')
         return `${firstNumber} ${firstOperator} ${secondNumber} ${secondOperator}`
     }
 
@@ -153,7 +156,10 @@ document.addEventListener("DOMContentLoaded", function() {
             default:
               return('something went wrong with the operator');
         }
-     function del (idk) {
+     function del () {
+        equationArray.pop()
+        joinedEquation = equationArray.join(' ')
+        return joinedEquation
 
     }
     
