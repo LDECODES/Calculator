@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let savedEquation = ''
     let savedScreen = ""
     let equationArray = []
+    let error = false;
     let equation = {
         firstNumber: [],
         secondNumber: [],
@@ -19,63 +20,78 @@ document.addEventListener("DOMContentLoaded", function() {
         const target = event.target;
         switch (target.id) {
             case '1':
+                clear()
                 savedEquation = saveEquation(target.id)
+                console.log(savedEquation)
                 display(savedEquation)
                 break
             case '2':
-                value = target.id
-                display()
+                clear()
+                savedEquation = saveEquation(target.id)
+                display(savedEquation)
                 break
             case '3':
-                value = target.id
-                display(value)
+                clear()
+                savedEquation = saveEquation(target.id)
+                display(savedEquation)
                 break
             case '4':
-                value = target.id
-                display(value)
+                clear()
+                savedEquation = saveEquation(target.id)
+                display(savedEquation)
                 break
             case '5':
-                value = target.id
-                display(value)
+                clear()
+                savedEquation = saveEquation(target.id)
+                display(savedEquation)
                 break
             case '6':
-                value = target.id
-                display(value)
+                clear()
+                savedEquation = saveEquation(target.id)
+                display(savedEquation)
                 break
             case '7':
-                value = target.id
-                display(value)
+                clear()
+                savedEquation = saveEquation(target.id)
+                display(savedEquation)
                 break
             case '8':
-                value = target.id
-                display(value)
+                clear()
+                savedEquation = saveEquation(target.id)
+                display(savedEquation)
                 break
             case '9':
-                value = target.id
-                display(value)
+                clear()
+                savedEquation = saveEquation(target.id)
+                display(savedEquation)
                 break
             case '0':
-                value = target.id
-                display(value)
+                clear()
+                savedEquation = saveEquation(target.id)
+                display(savedEquation)
                 break
             case '+':
-                value = target.id
-                display(value)
+                clear()
+                savedEquation = saveEquation(target.id)
+                display(savedEquation)
                 break
             case '-':
-                value = target.id
-                display(value)
+                clear()
+                savedEquation = saveEquation(target.id)
+                display(savedEquation)
                 break
             case '/':
-                value = target.id
-                display(value)
+                clear()
+                savedEquation = saveEquation(target.id)
+                display(savedEquation)
                 break
             case 'x':
-                value = target.id
-                display(value)
+                clear()
+                savedEquation = saveEquation(target.id)
+                display(savedEquation)
                 break
             case '=':
-                operate()
+                operate(equationArray)
                 break
             case 'clear':
                 clear()
@@ -85,13 +101,16 @@ document.addEventListener("DOMContentLoaded", function() {
                 display(newEquation)
                 break
             case '.':
-                value = target.id
-                display(value)
+                clear()
+                savedEquation = saveEquation(target.id)
+                display(savedEquation)
                 break
             default:
                 break
         }
+    
     })
+
 
 
     function add(a, b){
@@ -114,12 +133,16 @@ document.addEventListener("DOMContentLoaded", function() {
         if(equation.firstNumber.length > 0 ){
             if (value == "+" ||value ==  "-" || value == "x" || value == "/" ){
                 equation.firstOperator.push(value)
+                console.log(equation.firstOperator)
             }else {
                 equation.firstNumber.push(value)
+                console.log(equation.firstNumber)
             }
-        }else if(!equation.firstOperator == '' ) {
+        }else if(equation.firstOperator == '' ) {
             equation.secondNumber.push(value)
-        }else if (!equation.secondNumber.length < 1 || equation.secondNumber == undefined && value == "+" ||value ==  "-" || value == "x" || value == "/" ){
+
+        }else if (equation.secondNumber.length > 0 || equation.secondNumber == undefined && value == "+" ||value ==  "-" || value == "x" || value == "/" ){
+            
             equation.secondOperator.push(value)
         }
 
@@ -127,35 +150,48 @@ document.addEventListener("DOMContentLoaded", function() {
         let secondNumber = equation.secondNumber.join('')
         let firstOperator = equation.firstOperator
         let secondOperator = equation.secondOperator
+        console.log(firstNumber)
 
         equationArray.push(firstNumber, firstOperator, secondNumber, secondOperator )
         let joinedEquation = equationArray.join(' ')
-        return `${firstNumber} ${firstOperator} ${secondNumber} ${secondOperator}`
+        return joinedEquation
     }
 
 
    
 
-    function operate(operator, a, b){
-        switch (operator) {
-            case '+':
-                add(a, b)
-                break
-
-            case '-':
-                subtract(a, b)
-                break
-
-            case '/':
-                divide(a, b)
-                break
-
-            case 'x':
-                multiply(a, b)
-                break
-            default:
-              return('something went wrong with the operator');
+    function operate(array){
+        firstNumber = array[0]
+        firstOperator = array[1]
+        secondNumber = array[2]
+        secondOperator = array[3]
+        if(firstNumber == 0 || secondNumber == 0 || firstOperator == ''){
+            pScreen.textContent = 'thats a no no'
+        }else if (firstOperator == '+' || firstOperator == '-' || firstOperator == 'x' || firstOperator == '/'){
+            switch (firstOperator) {
+                case '+':
+                    add(firstNumber, secondNumber)
+                    break
+    
+                case '-':
+                    subtract(firstNumber, secondNumber)
+                    break
+    
+                case '/':
+                    divide(firstNumber, secondNumber)
+                    break
+    
+                case 'x':
+                    multiply(firstNumber, secondNumber)
+                    break
+                default:
+                  return('something went wrong with the operator');
+            }
+            
         }
+            
+    
+    }
      function del () {
         equationArray.pop()
         joinedEquation = equationArray.join(' ')
@@ -164,16 +200,21 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
     function display(value){
-        primaryScreen.textContent = value
+        pScreen.textContent = value
     }
 
     function clear(){
-    primaryScreen.textContent = ''
+    if (error = true) {
+        pScreen.textContent = ''
+    }else {
+        console.log('nothing wrong here')
+    }
     }
     
 }
-    })
+    )
 
 })
+
 
 

@@ -45,3 +45,8 @@ button {
   font-weight: 900px;
   font-size: xx-large;
 }
+
+.primary-screen {
+  height: 100px;
+  width: 100px;
+}
