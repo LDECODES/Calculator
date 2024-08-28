@@ -17,7 +17,6 @@ html {
   flex-direction: column;
   width: 85vh;
   height: 80vh;
-  
 }
 .wrapper {
   display: flex;
@@ -28,7 +27,6 @@ html {
   height: 60vh;
   width: 84vh;
   justify-content: space-around;
-  
 }
 
 .button {
@@ -36,7 +34,7 @@ html {
   flex-grow: 1;
   flex-shrink: 1;
   background-color: lightgray;
-  border: 3px solid #000000;
+  border: 5px solid black;
   border-radius: 20px;
   justify-content: center;
   align-items: center;
@@ -47,10 +45,7 @@ html {
   
 }
 
-#screen {
-  border: 2px solid white;
-  
-}
+
 
 .screens {
   width: 85vh;
@@ -58,9 +53,6 @@ html {
   display: flex;
   flex-direction: column;
   border-radius: 16px 16px 0px 0px;
-  
-  
-  ;
 }
 
 .primary-screen {
@@ -70,13 +62,7 @@ html {
   font-weight: bolder;
   font-size:xx-large;
   height: 12.5vh;
-  border: 3px solid white;
   border-radius: 16px 16px 0px 0px;
-  
-  
-  
-  
-  
 }
 
 .secondary-screen {
@@ -84,11 +70,8 @@ html {
   align-items: end;
   justify-content: center;
   height: 7vh;
-  border: 3px solid white;
   font-size:larger;
   font-weight: bold;
-
-  ;
 }
 
 #clear {
