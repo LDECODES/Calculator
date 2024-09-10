@@ -22,11 +22,12 @@ html {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-evenly;
   border: 3px solid white;
   border-radius: 0px 0px 16px 16px;
   height: 60vh;
-  width: 84vh;
-  justify-content: space-around;
+  width: 84.7vh;
+  
 }
 
 .button {
@@ -40,12 +41,14 @@ html {
   align-items: center;
   font-size: xx-large;
   font-weight: bolder;
-  height: 95px;
-  width: 95px;
+  height: 100px;
+  width: 100px;
   
 }
 
-
+#screen {
+  
+}
 
 .screens {
   width: 85vh;
@@ -57,6 +60,7 @@ html {
 
 .primary-screen {
   display: flex;
+  flex-wrap: wrap;
   align-items: end;
   justify-content: center;
   font-weight: bolder;

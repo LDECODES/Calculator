@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", function() {
     let sScreen = document.querySelector('.secondary-screen')
     let savedEquation = ''
     let savedScreen = ""
-    let equationArray = []
     let error = false;
+    let equationArray = []
     let equation = {
         firstNumber: [],
         secondNumber: [],
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
             case '1':
                 clear()
                 savedEquation = saveEquation(target.id)
-                console.log(savedEquation)
+                console.log( savedEquation)
                 display(savedEquation)
                 break
             case '2':
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 savedEquation = saveEquation(target.id)
                 display(savedEquation)
                 break
-            case '/':
+            case '÷':
                 clear()
                 savedEquation = saveEquation(target.id)
                 display(savedEquation)
@@ -126,48 +126,82 @@ document.addEventListener("DOMContentLoaded", function() {
     } 
 
     function multiply(a, b){ 
-        returna * b
+        return a * b
     } 
 
-    function saveEquation (value) {
-        if(equation.firstNumber.length > 0 ){
-            if (value == "+" ||value ==  "-" || value == "x" || value == "/" ){
-                equation.firstOperator.push(value)
-                console.log(equation.firstOperator)
-            }else {
-                equation.firstNumber.push(value)
-                console.log(equation.firstNumber)
+    function saveEquation(value) {
+        console.log(equation);
+    
+        // Initialize equation properties if they are undefined
+        if (!equation.firstNumber) equation.firstNumber = [];
+        if (!equation.secondNumber) equation.secondNumber = [];
+        if (!equation.firstOperator) equation.firstOperator = '';
+        if (!equation.secondOperator) equation.secondOperator = '';
+    
+        // Handle first number and operator
+        if (equation.firstOperator === '') {
+            if (["+", "-", "x", "÷"].includes(value)) {
+                equation.firstOperator = value;
+                console.log("First operator set: ", equation.firstOperator);
+            } else {
+                equation.firstNumber.push(value);
+                console.log("First number updated: ", equation.firstNumber);
             }
-        }else if(equation.firstOperator == '' ) {
-            equation.secondNumber.push(value)
-
-        }else if (equation.secondNumber.length > 0 || equation.secondNumber == undefined && value == "+" ||value ==  "-" || value == "x" || value == "/" ){
-            
-            equation.secondOperator.push(value)
         }
-
-        let firstNumber = equation.firstNumber.join('')
-        let secondNumber = equation.secondNumber.join('')
-        let firstOperator = equation.firstOperator
-        let secondOperator = equation.secondOperator
-        console.log(firstNumber)
-
-        equationArray.push(firstNumber, firstOperator, secondNumber, secondOperator )
-        let joinedEquation = equationArray.join(' ')
-        return joinedEquation
+        // Handle second number and operator
+        else if (equation.firstOperator !== '' && equation.secondOperator === '') {
+            if (["+", "-", "x", "÷"].includes(value)) {
+                equation.secondOperator = value;
+                console.log("Second operator set: ", equation.secondOperator);
+            } else {
+                equation.secondNumber.push(value);
+                console.log("Second number updated: ", equation.secondNumber);
+            }
+        }
+        // Handle continuing after second operator
+        else if (equation.secondOperator !== '') {
+            equation.secondNumber.push(value);
+            console.log("Second number continued: ", equation.secondNumber);
+        }
+    
+        // Joining and preparing equation for logging
+        let firstNumber = equation.firstNumber.join('');
+        let secondNumber = equation.secondNumber.join('');
+        let firstOperator = equation.firstOperator;
+        let secondOperator = equation.secondOperator || '';
+    
+        // Clear equationArray before pushing new values
+        equationArray = [firstNumber, firstOperator, secondNumber, secondOperator].filter(Boolean);
+        let joinedEquation = equationArray.join('');
+        console.log("Equation: ", joinedEquation);
+    
+        return joinedEquation;
     }
+    
+    
 
 
    
 
     function operate(array){
-        firstNumber = array[0]
+        
+        firstNumber = array[0].
         firstOperator = array[1]
         secondNumber = array[2]
         secondOperator = array[3]
+        if (typeof firstNumber === "string"){
+            firstNumber = parseint(firstNumber)
+            }
+        if (typeof secondNumber === "string"){
+            secondNumber = parseInt(secondNumber)
+            }
+     
+        
+
+
         if(firstNumber == 0 || secondNumber == 0 || firstOperator == ''){
             pScreen.textContent = 'thats a no no'
-        }else if (firstOperator == '+' || firstOperator == '-' || firstOperator == 'x' || firstOperator == '/'){
+        }else if (firstOperator == '+' || firstOperator == '-' || firstOperator == 'x' || firstOperator == '÷'){
             switch (firstOperator) {
                 case '+':
                     add(firstNumber, secondNumber)
@@ -177,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     subtract(firstNumber, secondNumber)
                     break
     
-                case '/':
+                case '÷':
                     divide(firstNumber, secondNumber)
                     break
     
@@ -190,25 +224,33 @@ document.addEventListener("DOMContentLoaded", function() {
             
         }
             
-    
     }
      function del () {
         equationArray.pop()
         joinedEquation = equationArray.join(' ')
         return joinedEquation
-
     }
     
     function display(value){
+        clear()
         pScreen.textContent = value
     }
 
     function clear(){
-    if (error = true) {
         pScreen.textContent = ''
-    }else {
-        console.log('nothing wrong here')
-    }
+        //equationArray = []
+         //equation = {
+        //    firstNumber: [],
+         //   secondNumber: [],
+         //   firstOperator: '',
+        //    secondOperator: '',
+       // }
+        
+    //if (error = true) {
+     //   pScreen.textContent = ''
+   // }else {
+   //     console.log('nothing wrong here')
+   // }
     }
     
 }
