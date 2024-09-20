@@ -178,52 +178,75 @@ document.addEventListener("DOMContentLoaded", function() {
         return joinedEquation;
     }
     
-    
-
-
-   
-
     function operate(array){
+        let answer = 0 ;
         
-        firstNumber = array[0].
+        firstNumber = array[0]
         firstOperator = array[1]
         secondNumber = array[2]
         secondOperator = array[3]
         if (typeof firstNumber === "string"){
-            firstNumber = parseint(firstNumber)
+            if (firstNumber.includes('.')){
+                firstNumber = parseFloat(firstNumber)
+            }else{
+                firstNumber = parseInt(firstNumber)
+            }
+            console.log(firstNumber)
             }
         if (typeof secondNumber === "string"){
-            secondNumber = parseInt(secondNumber)
+            if (secondNumber.includes('.')){
+                secondNumber = parseFloat(secondNumber)
+            }else{
+                secondNumber = parseInt(secondNumber)
             }
-     
-        
-
-
+            console.log(secondNumber)
+            }
+            console.log(firstOperator)
         if(firstNumber == 0 || secondNumber == 0 || firstOperator == ''){
             pScreen.textContent = 'thats a no no'
         }else if (firstOperator == '+' || firstOperator == '-' || firstOperator == 'x' || firstOperator == '÷'){
             switch (firstOperator) {
-                case '+':
-                    add(firstNumber, secondNumber)
+                case "+":
+                    console.log("adding")
+                    answer = add(firstNumber, secondNumber)
                     break
     
-                case '-':
-                    subtract(firstNumber, secondNumber)
+                case "-":
+                    answer = subtract(firstNumber, secondNumber)
                     break
     
-                case '÷':
-                    divide(firstNumber, secondNumber)
+                case "÷":
+                    console.log("dividing")
+                    answer = divide(firstNumber, secondNumber)
                     break
     
-                case 'x':
-                    multiply(firstNumber, secondNumber)
+                case "x":
+                    answer = multiply(firstNumber, secondNumber)
                     break
                 default:
                   return('something went wrong with the operator');
             }
             
-        }
+            pscreen(answer)
+            sScreen.textContent = `${firstNumber} ${firstOperator} ${secondNumber} `
+            equationArray = []
+            equation = {
+                firstNumber: `${answer}`,
+                secondNumber: [],
+                firstOperator: `${secondOperator}`,
+                secondOperator: '',
+            }
+            pScreen.textContent = `${equation.firstNumber} ${equation.firstOperator} ${equation.secondNumber} ${equation.secondOperator}`
             
+            
+        }
+
+        
+            
+    }
+
+    function pscreen (value) {
+        pScreen.textContent = value
     }
      function del () {
         equationArray.pop()
