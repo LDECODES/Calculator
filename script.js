@@ -137,26 +137,24 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!equation.firstOperator) equation.firstOperator = '';
         if (!equation.secondOperator) equation.secondOperator = '';
     
-        // Handle first number and operator
+        // Handle firsrstNut number and operator
         if (equation.firstOperator === '') {
-            if (["+", "-", "x", "÷"].includes(value)) {
-                equation.firstOperator = value;
-                console.log("First operator set: ", equation.firstOperator);
-            } else {
+            }if ([1,2,3,4,5,6,7,8,9].includes(value)) {
                 equation.firstNumber.push(value);
                 console.log("First number updated: ", equation.firstNumber);
-            }
+            }else if (["+", "-", "x", "÷"].includes(value)) {
+                equation.firstOperator = value;
+                console.log("First operator set: ", equation.firstOperator);
         }
         // Handle second number and operator
         else if (equation.firstOperator !== '' && equation.secondOperator === '' && noOfOperators !== 2) {
-            if (["+", "-", "x", "÷"].includes(value)) {
-                equation.secondOperator = value;
-                noOfOperators = 2;
-                console.log("Second operator set: ", equation.secondOperator);
-            } else {
+            if ([1,2,3,4,5,6,7,8,9].includes(value)) {
                 equation.secondNumber.push(value);
-                console.log("Second number updated: ", equation.secondNumber);
-            }
+                console.log("First number updated: ", equation.firstNumber);
+            }else if (["+", "-", "x", "÷"].includes(value)) {
+                equation.firstOperator = value;
+                console.log("First operator set: ", equation.firstOperator);
+        }
         }
         // Handle continuing after second operator
         else if (equation.secondOperator !== '') {
