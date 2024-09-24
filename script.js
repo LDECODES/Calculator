@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let sScreen = document.querySelector('.secondary-screen')
     let savedEquation = ''
     let savedScreen = ""
+    let noOfOperators = 0;
     let error = false;
     let equationArray = []
     let equation = {
@@ -22,7 +23,6 @@ document.addEventListener("DOMContentLoaded", function() {
             case '1':
                 clear()
                 savedEquation = saveEquation(target.id)
-                console.log( savedEquation)
                 display(savedEquation)
                 break
             case '2':
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
     })
 
-
+////// The save equations fucntions allows operators in the number array so filter that 
 
     function add(a, b){
         return a + b
@@ -132,7 +132,6 @@ document.addEventListener("DOMContentLoaded", function() {
     function saveEquation(value) {
         console.log(equation);
     
-        // Initialize equation properties if they are undefined
         if (!equation.firstNumber) equation.firstNumber = [];
         if (!equation.secondNumber) equation.secondNumber = [];
         if (!equation.firstOperator) equation.firstOperator = '';
@@ -149,9 +148,10 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
         // Handle second number and operator
-        else if (equation.firstOperator !== '' && equation.secondOperator === '') {
+        else if (equation.firstOperator !== '' && equation.secondOperator === '' && noOfOperators !== 2) {
             if (["+", "-", "x", "÷"].includes(value)) {
                 equation.secondOperator = value;
+                noOfOperators = 2;
                 console.log("Second operator set: ", equation.secondOperator);
             } else {
                 equation.secondNumber.push(value);
@@ -161,12 +161,13 @@ document.addEventListener("DOMContentLoaded", function() {
         // Handle continuing after second operator
         else if (equation.secondOperator !== '') {
             equation.secondNumber.push(value);
+            
             console.log("Second number continued: ", equation.secondNumber);
+        
         }
-    
         // Joining and preparing equation for logging
-        let firstNumber = equation.firstNumber.join('');
-        let secondNumber = equation.secondNumber.join('');
+        let firstNumber = Array.isArray(equation.firstNumber) ? equation.firstNumber.join('') : Array.from(equation.firstNumber).join('');
+        let secondNumber = Array.isArray(equation.secondNumber) ? equation.secondNumber.join('') : Array.from(equation.secondNumber).join('');
         let firstOperator = equation.firstOperator;
         let secondOperator = equation.secondOperator || '';
     
@@ -176,6 +177,7 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("Equation: ", joinedEquation);
     
         return joinedEquation;
+        
     }
     
     function operate(array){
@@ -236,7 +238,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 firstOperator: `${secondOperator}`,
                 secondOperator: '',
             }
-            pScreen.textContent = `${equation.firstNumber} ${equation.firstOperator} ${equation.secondNumber} ${equation.secondOperator}`
+
+            pScreen.textContent = `${equation.firstNumber}`
+            sScreen.textContent = `${equation.firstNumber} ${equation.firstOperator} ${equation.secondNumber} ${equation.secondOperator}`
+            
+            equationArray = [equation.firstNumber, equation.firstOperator, equation.secondNumber, equation.secondOperator].filter(Boolean);
+            joinedEquation = equationArray.join('')
+            
             
             
         }
@@ -244,7 +252,6 @@ document.addEventListener("DOMContentLoaded", function() {
         
             
     }
-
     function pscreen (value) {
         pScreen.textContent = value
     }
@@ -256,7 +263,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
     function display(value){
         clear()
-        pScreen.textContent = value
+        pscreen(value)
     }
 
     function clear(){
@@ -277,7 +284,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
 }
-    )
+   )
 
 })
 
