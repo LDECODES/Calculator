@@ -1,11 +1,15 @@
 document.addEventListener("DOMContentLoaded", function() {
 
     let value = 0;
+    let dec1 = false;
+    let dec2 = false;
+    var periodButton = document.getElementById('.');
     let pScreen = document.querySelector('.primary-screen')
     let sScreen = document.querySelector('.secondary-screen')
     let savedEquation = ''
     let savedScreen = ""
     let noOfOperators = 0;
+    let keydownActive = false
     let error = false;
     let equationArray = []
     let equation = {
@@ -14,104 +18,53 @@ document.addEventListener("DOMContentLoaded", function() {
         firstOperator: '',
         secondOperator: '',
     }
-       
-
+    
     document.querySelectorAll('button').forEach(button => {
         button.addEventListener("click", function(event) {
         const target = event.target;
-        switch (target.id) {
-            case '1':
-                //clear()
-                savedEquation = saveEquation(target.id)
-                display(savedEquation)
-                break
-            case '2':
-                //clear()
-                savedEquation = saveEquation(target.id)
-                display(savedEquation)
-                break
-            case '3':
-                //clear()
-                savedEquation = saveEquation(target.id)
-                display(savedEquation)
-                break
-            case '4':
-                //clear()
-                savedEquation = saveEquation(target.id)
-                display(savedEquation)
-                break
-            case '5':
-                //clear()
-                savedEquation = saveEquation(target.id)
-                display(savedEquation)
-                break
-            case '6':
-                //clear()
-                savedEquation = saveEquation(target.id)
-                display(savedEquation)
-                break
-            case '7':
-               // clear()
-                savedEquation = saveEquation(target.id)
-                display(savedEquation)
-                break
-            case '8':
-               // clear()
-                savedEquation = saveEquation(target.id)
-                display(savedEquation)
-                break
-            case '9':
-                //clear()
-                savedEquation = saveEquation(target.id)
-                display(savedEquation)
-                break
-            case '0':
-                //clear()
-                savedEquation = saveEquation(target.id)
-                display(savedEquation)
-                break
-            case '+':
-                //clear()
-                savedEquation = saveEquation(target.id)
-                display(savedEquation)
-                break
-            case '-':
-                //clear()
-                savedEquation = saveEquation(target.id)
-                display(savedEquation)
-                break
-            case '÷':
-                //clear()
-                savedEquation = saveEquation(target.id)
-                display(savedEquation)
-                break
-            case 'x':
-                //clear()
-                savedEquation = saveEquation(target.id)
-                display(savedEquation)
-                break
-            case '=':
-                operate(equationArray)
-                break
-            case 'clear':
-                clear()
-                break
-            case 'Del':
-                let newEquation = del()
-                display(newEquation)
-                break
-            case '.':
-                clear()
-                savedEquation = saveEquation(target.id)
-                display(savedEquation)
-                break
-            default:
-                break
-        }
-    
-    })
+        handleInput(target.id);  
+    });
+    });
 
-////// The save equations fucntions allows operators in the number array so filter that 
+    document.addEventListener('keydown', event => {
+        if (keydownActive) return;  
+        keydownActive = true;
+
+        handleInput(event.key);  
+
+    
+        setTimeout(() => keydownActive = false, 200);
+    });
+
+    
+    function handleInput(input) {
+        switch(input){
+            case '1': case '2': case '3': case '4': case '5': 
+            case '6': case '7': case '8': case '9': case '0':
+            case '+': case '-': case '÷': case 'x': case '.':
+                savedEquation = saveEquation(input);
+                display(savedEquation);
+                break;
+            case '=':
+                operate(equationArray);
+                break;
+            case 'Enter':
+                operate(equationArray);
+                break;
+           
+            case 'backspace':
+                clear();
+                break;
+            case 'Del':
+                let newEquation = del();
+                display(newEquation);
+                break;
+            default:
+                break;
+        }
+    }
+
+
 
     function add(a, b){
         return a + b
@@ -137,56 +90,67 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!equation.firstOperator) equation.firstOperator = '';
         if (!equation.secondOperator) equation.secondOperator = '';
     
-        // Check if the value is a number
+        
         const isNumber =  ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "."].includes(value);
     
-        // Check if the value is an operator
+       
         const isOperator = ["+", "-", "x", "÷"].includes(value);
-    
-        // Handle the first number
+     console.log(isNumber)
+       
         if (equation.firstOperator === '' && isNumber) {
 
-            if (equation.firstNumber.join('').includes(".") && value === ".") {
+            if (value === "." && dec1 === false) {
+                equation.firstNumber.push(value);
+                dec1 = true;
+                periodButton.disabled = true;
+                console.log("Decimal button disabled");
 
             }else {
                 equation.firstNumber.push(value);
             }
             
         }
-    
-        // Handle the first operator
+
         else if (equation.firstOperator === '' && isOperator) {
             if (equation.firstNumber.length > 0) {  // Ensure there's a number before adding operator
                 equation.firstOperator = value;
+                periodButton.disabled = false;
                 console.log("First operator set: ", equation.firstOperator);
             }
         }
     
-        // Handle the second number
+        
         else if (equation.firstOperator !== '' && equation.secondOperator === '' && isNumber) {
-            equation.secondNumber.push(value);
-            console.log("Second number updated: ", equation.secondNumber);
+            if (value === "." && dec2 === false) {
+                equation.secondNumber.push(value);
+                dec2 = true;
+                periodButton.disabled = true;
+                console.log("Decimal button disabled");
+
+            }else {
+                equation.secondNumber.push(value);
+            }
         }
     
-        // Prevent multiple operators after the second number is set
+        
         else if (equation.firstOperator !== '' && equation.secondNumber.length > 0 && isOperator && equation.secondOperator === '') {
             equation.secondOperator = value;
             console.log("Second operator set: ", equation.secondOperator);
         }
     
-        // Handle continuing after second operator
+        
         else if (equation.secondOperator !== '' && isNumber) {
             equation.secondNumber.push(value);
             console.log("Second number continued: ", equation.secondNumber);
         }
     
-        // Joining and preparing equation for display
+        
         let firstNumber = Array.isArray(equation.firstNumber) ? equation.firstNumber.join('') : Array.from(equation.firstNumber).join('');
         let secondNumber = Array.isArray(equation.secondNumber) ? equation.secondNumber.join('') : Array.from(equation.secondNumber).join('');
         let firstOperator = equation.firstOperator;
         let secondOperator = equation.secondOperator || '';
         console.log(secondOperator)
-        // Clear equationArray before pushing new values
+        
         equationArray = [firstNumber, firstOperator, secondNumber, secondOperator].filter(Boolean);
         
         let joinedEquation = equationArray.join('');
@@ -255,6 +219,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 firstOperator: `${equation.secondOperator}`,
                 secondOperator: '',
             }
+            dec1 = false
+            dec2 = false
+            periodButton.disabled = false;
+
+            
 
             //pScreen.textContent = `${equation.firstNumber}`
             //sScreen.textContent = `${equation.firstNumber} ${equation.firstOperator} ${equation.secondNumber} ${equation.secondOperator}`
@@ -292,6 +261,9 @@ document.addEventListener("DOMContentLoaded", function() {
             firstOperator: '',
             secondOperator: '',
         }
+        dec1 = false
+        dec2 = false
+        periodButton.disabled = false;
         display("Enter New Equation")
         sScreen.textContent = '';
         
@@ -301,10 +273,11 @@ document.addEventListener("DOMContentLoaded", function() {
        console.log('nothing wrong here')
     }
     }
+
     
 }
    )
-
+({
 })
 
 
