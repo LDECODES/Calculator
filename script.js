@@ -21,72 +21,72 @@ document.addEventListener("DOMContentLoaded", function() {
         const target = event.target;
         switch (target.id) {
             case '1':
-                clear()
+                //clear()
                 savedEquation = saveEquation(target.id)
                 display(savedEquation)
                 break
             case '2':
-                clear()
+                //clear()
                 savedEquation = saveEquation(target.id)
                 display(savedEquation)
                 break
             case '3':
-                clear()
+                //clear()
                 savedEquation = saveEquation(target.id)
                 display(savedEquation)
                 break
             case '4':
-                clear()
+                //clear()
                 savedEquation = saveEquation(target.id)
                 display(savedEquation)
                 break
             case '5':
-                clear()
+                //clear()
                 savedEquation = saveEquation(target.id)
                 display(savedEquation)
                 break
             case '6':
-                clear()
+                //clear()
                 savedEquation = saveEquation(target.id)
                 display(savedEquation)
                 break
             case '7':
-                clear()
+               // clear()
                 savedEquation = saveEquation(target.id)
                 display(savedEquation)
                 break
             case '8':
-                clear()
+               // clear()
                 savedEquation = saveEquation(target.id)
                 display(savedEquation)
                 break
             case '9':
-                clear()
+                //clear()
                 savedEquation = saveEquation(target.id)
                 display(savedEquation)
                 break
             case '0':
-                clear()
+                //clear()
                 savedEquation = saveEquation(target.id)
                 display(savedEquation)
                 break
             case '+':
-                clear()
+                //clear()
                 savedEquation = saveEquation(target.id)
                 display(savedEquation)
                 break
             case '-':
-                clear()
+                //clear()
                 savedEquation = saveEquation(target.id)
                 display(savedEquation)
                 break
             case '÷':
-                clear()
+                //clear()
                 savedEquation = saveEquation(target.id)
                 display(savedEquation)
                 break
             case 'x':
-                clear()
+                //clear()
                 savedEquation = saveEquation(target.id)
                 display(savedEquation)
                 break
@@ -145,8 +145,13 @@ document.addEventListener("DOMContentLoaded", function() {
     
         // Handle the first number
         if (equation.firstOperator === '' && isNumber) {
-            equation.firstNumber.push(value);
-            console.log("First number updated: ", equation.firstNumber);
+
+            if (equation.firstNumber.join('').includes(".") && value === ".") {
+
+            }else {
+                equation.firstNumber.push(value);
+            }
+            
         }
     
         // Handle the first operator
@@ -180,9 +185,10 @@ document.addEventListener("DOMContentLoaded", function() {
         let secondNumber = Array.isArray(equation.secondNumber) ? equation.secondNumber.join('') : Array.from(equation.secondNumber).join('');
         let firstOperator = equation.firstOperator;
         let secondOperator = equation.secondOperator || '';
-    
+        console.log(secondOperator)
         // Clear equationArray before pushing new values
         equationArray = [firstNumber, firstOperator, secondNumber, secondOperator].filter(Boolean);
+        
         let joinedEquation = equationArray.join('');
         console.log("Equation: ", joinedEquation);
     
@@ -246,7 +252,7 @@ document.addEventListener("DOMContentLoaded", function() {
             equation = {
                 firstNumber: `${answer}`,
                 secondNumber: [],
-                firstOperator: `${secondOperator}`,
+                firstOperator: `${equation.secondOperator}`,
                 secondOperator: '',
             }
 
@@ -273,25 +279,27 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
     function display(value){
-        clear()
+        
         pscreen(value)
     }
 
     function clear(){
         pScreen.textContent = ''
-        //equationArray = []
-         //equation = {
-        //    firstNumber: [],
-         //   secondNumber: [],
-         //   firstOperator: '',
-        //    secondOperator: '',
-       // }
+        equationArray = []
+        equation = {
+            firstNumber: [],
+            secondNumber: [],
+            firstOperator: '',
+            secondOperator: '',
+        }
+        display("Enter New Equation")
+        sScreen.textContent = '';
         
-    //if (error = true) {
-     //   pScreen.textContent = ''
-   // }else {
-   //     console.log('nothing wrong here')
-   // }
+    if (error = true) {
+        pScreen.textContent = ''
+    }else {
+       console.log('nothing wrong here')
+    }
     }
     
 }
