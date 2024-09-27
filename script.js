@@ -137,33 +137,45 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!equation.firstOperator) equation.firstOperator = '';
         if (!equation.secondOperator) equation.secondOperator = '';
     
-        // Handle firsrstNut number and operator
-        if (equation.firstOperator === '') {
-            }if ([1,2,3,4,5,6,7,8,9].includes(value)) {
-                equation.firstNumber.push(value);
-                console.log("First number updated: ", equation.firstNumber);
-            }else if (["+", "-", "x", "÷"].includes(value)) {
+        // Check if the value is a number
+        const isNumber =  ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "."].includes(value);
+    
+        // Check if the value is an operator
+        const isOperator = ["+", "-", "x", "÷"].includes(value);
+    
+        // Handle the first number
+        if (equation.firstOperator === '' && isNumber) {
+            equation.firstNumber.push(value);
+            console.log("First number updated: ", equation.firstNumber);
+        }
+    
+        // Handle the first operator
+        else if (equation.firstOperator === '' && isOperator) {
+            if (equation.firstNumber.length > 0) {  // Ensure there's a number before adding operator
                 equation.firstOperator = value;
                 console.log("First operator set: ", equation.firstOperator);
+            }
         }
-        // Handle second number and operator
-        else if (equation.firstOperator !== '' && equation.secondOperator === '' && noOfOperators !== 2) {
-            if ([1,2,3,4,5,6,7,8,9].includes(value)) {
-                equation.secondNumber.push(value);
-                console.log("First number updated: ", equation.firstNumber);
-            }else if (["+", "-", "x", "÷"].includes(value)) {
-                equation.firstOperator = value;
-                console.log("First operator set: ", equation.firstOperator);
-        }
-        }
-        // Handle continuing after second operator
-        else if (equation.secondOperator !== '') {
+    
+        // Handle the second number
+        else if (equation.firstOperator !== '' && equation.secondOperator === '' && isNumber) {
             equation.secondNumber.push(value);
-            
-            console.log("Second number continued: ", equation.secondNumber);
-        
+            console.log("Second number updated: ", equation.secondNumber);
         }
-        // Joining and preparing equation for logging
+    
+        // Prevent multiple operators after the second number is set
+        else if (equation.firstOperator !== '' && equation.secondNumber.length > 0 && isOperator && equation.secondOperator === '') {
+            equation.secondOperator = value;
+            console.log("Second operator set: ", equation.secondOperator);
+        }
+    
+        // Handle continuing after second operator
+        else if (equation.secondOperator !== '' && isNumber) {
+            equation.secondNumber.push(value);
+            console.log("Second number continued: ", equation.secondNumber);
+        }
+    
+        // Joining and preparing equation for display
         let firstNumber = Array.isArray(equation.firstNumber) ? equation.firstNumber.join('') : Array.from(equation.firstNumber).join('');
         let secondNumber = Array.isArray(equation.secondNumber) ? equation.secondNumber.join('') : Array.from(equation.secondNumber).join('');
         let firstOperator = equation.firstOperator;
@@ -175,8 +187,8 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("Equation: ", joinedEquation);
     
         return joinedEquation;
-        
     }
+    
     
     function operate(array){
         let answer = 0 ;
@@ -228,7 +240,8 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             
             pscreen(answer)
-            sScreen.textContent = `${firstNumber} ${firstOperator} ${secondNumber} `
+            joinedEquation = array.join('')
+            sScreen.textContent = `${joinedEquation}  `
             equationArray = []
             equation = {
                 firstNumber: `${answer}`,
@@ -237,8 +250,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 secondOperator: '',
             }
 
-            pScreen.textContent = `${equation.firstNumber}`
-            sScreen.textContent = `${equation.firstNumber} ${equation.firstOperator} ${equation.secondNumber} ${equation.secondOperator}`
+            //pScreen.textContent = `${equation.firstNumber}`
+            //sScreen.textContent = `${equation.firstNumber} ${equation.firstOperator} ${equation.secondNumber} ${equation.secondOperator}`
             
             equationArray = [equation.firstNumber, equation.firstOperator, equation.secondNumber, equation.secondOperator].filter(Boolean);
             joinedEquation = equationArray.join('')
