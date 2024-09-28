@@ -52,11 +52,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 operate(equationArray);
                 break;
            
-            case 'backspace':
+            case 'c':
                 clear();
                 break;
-            case 'Del':
+            case 'Backspace':
                 let newEquation = del();
+                display(newEquation);
+                break;
+            case 'del' :
+                 newEquation = del();
                 display(newEquation);
                 break;
             default:
@@ -241,10 +245,34 @@ document.addEventListener("DOMContentLoaded", function() {
     function pscreen (value) {
         pScreen.textContent = value
     }
-     function del () {
-        equationArray.pop()
-        joinedEquation = equationArray.join(' ')
-        return joinedEquation
+     function del() {
+        if (equation.secondOperator) {
+           
+            equation.secondOperator = '';
+        } else if (equation.secondNumber.length > 0) {
+            
+            equation.secondNumber.pop();
+        } else if (equation.firstOperator) {
+          
+            equation.firstOperator = '';
+        } else if (equation.firstNumber.length > 0) {
+           
+            equation.firstNumber.pop();
+        }
+    
+      
+        let firstNumber = Array.isArray(equation.firstNumber) ? equation.firstNumber.join('') : Array.from(equation.firstNumber).join('');
+        let secondNumber = Array.isArray(equation.secondNumber) ? equation.secondNumber.join('') : Array.from(equation.secondNumber).join('');
+        let firstOperator = equation.firstOperator;
+        let secondOperator = equation.secondOperator || '';
+        
+        equationArray = [firstNumber, firstOperator, secondNumber, secondOperator].filter(Boolean); 
+    
+        let joinedEquation = equationArray.join('');
+        console.log("Deleted last character, Stack: ", equationArray);
+    
+        return joinedEquation; 
+        
     }
     
     function display(value){
@@ -267,18 +295,9 @@ document.addEventListener("DOMContentLoaded", function() {
         display("Enter New Equation")
         sScreen.textContent = '';
         
-    if (error = true) {
-        pScreen.textContent = ''
-    }else {
-       console.log('nothing wrong here')
-    }
+    
     }
 
     
 }
    )
-({
-})
-
-
-
