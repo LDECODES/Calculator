@@ -55,6 +55,9 @@ document.addEventListener("DOMContentLoaded", function() {
             case 'c':
                 clear();
                 break;
+            case 'clear':
+                clear();
+                break;
             case 'Backspace':
                 let newEquation = del();
                 display(newEquation);
