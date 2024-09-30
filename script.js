@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
         switch(input){
             case '1': case '2': case '3': case '4': case '5': 
             case '6': case '7': case '8': case '9': case '0':
-            case '+': case '-': case '÷': case 'x': case '.':
+            case '+': case '-': case '÷': case 'x': case '.': 
                 savedEquation = saveEquation(input);
                 display(savedEquation);
                 break;
