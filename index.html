@@ -6,31 +6,79 @@
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js"></script>
     <title>Calculator</title>
+    <link rel="icon" href="img/OIP (1).jpeg">
   </head>
   <body>
-    <h1>The Calculator</h1>
+    <h1 class="title">The Calculator</h1>
     <div class="calculator">
-      <div class="screen"></div>
-      <div class="wrapper">
-        <button class="button" id="7">7</button>
-        <button class="button" id="8">8</button>
-        <button class="button" id="9">9</button>
-        <button class="button" id="/">÷</button>
-        <button class="button" id="4">4</button>
-        <button class="button" id="5">5</button>
-        <button class="button" id="6">6</button>
-        <button class="button" id="x">x</button>
-        <button class="button" id="1">1</button>
-        <button class="button" id="2">2</button>
-        <button class="button" id="3">3</button>
-        <button class="button" id="-">-</button>
-        <button class="button" id="0">0</button>
-        <button class="button" id="clear">clear</button>
-        <button class="button" id="=">=</button>
-        <button class="button" id="+">+</button>
-        <button class="button" id=".">.</button>
-        <button class="button" id="Del"></button>
+      <div class="screens">
+        <div class="primary-screen" id = "screen">Enter Equation</div>
+        <div class="secondary-screen" id ="screen"></div>
       </div>
+      <div class="keypad">
+        <div class="section-1">
+          <button class="button" id="Del"><svg xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 -960 960 960" width="50px" fill="#000000"><path d="m456-320 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 160q-19 0-36-8.5T296-192L80-480l216-288q11-15 28-23.5t36-8.5h440q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H360ZM180-480l180 240h440v-480H360L180-480Zm400 0Z"/></svg></button>
+          <button class="button" id="clear">C</button>
+        </div>
+        <div class="section-2">
+        <div class="unit-1">
+          <button class="button" id="9">9</button>
+          <button class="button" id="8">8</button>
+          <button class="button" id="7">7</button>
+          <button class="button" id="6">6</button>
+          <button class="button" id="5">5</button>
+          <button class="button" id="4">4</button>
+          <button class="button" id="3">3</button>
+          <button class="button" id="2">2</button>
+          <button class="button" id="1">1</button>
+        </div>  
+        <div class="unit-2">
+          <button class="button" id="x">x</button>
+          <button class="button" id="+">+</button>
+          <button class="button" id="-">-</button>
+          <button class="button" id="÷">÷</button>
+        </div>  
+        </div>
+        <div class="section-3">
+          <button class="button" id="0">0</button>
+          <button class="button" id=".">.</button>
+          <button class="button" id="=">=</button>
+        </div>
+      </div>
+
     </div>
+    
+    <!--<div class="title">
+      <h1>The Calculator</h1>
+    </div>
+    <div class="calculator">
+      <div class="screens">
+        <div class="primary-screen" id = "screen">Enter Equation</div>
+        <div class="secondary-screen" id ="screen"></div>
+      </div>
+      <div class="wrapper">
+        <button class="button" id="9">9</button>
+        <button class="button" id="8">8</button>
+        <button class="button" id="7">7</button>
+        <button class="button" id="Del"><svg xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 -960 960 960" width="50px" fill="#000000"><path d="m456-320 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 160q-19 0-36-8.5T296-192L80-480l216-288q11-15 28-23.5t36-8.5h440q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H360ZM180-480l180 240h440v-480H360L180-480Zm400 0Z"/></svg></button>
+        <button class="button" id="clear">C</button>
+        <button class="button" id="6">6</button>
+        <button class="button" id="5">5</button>
+        <button class="button" id="4">4</button>
+        
+        <button class="button" id="x">x</button>
+        <button class="button" id="+">+</button>
+`       <button class="button" id="3">3</button>
+        <button class="button" id="2">2</button>
+        <button class="button" id="1">1</button>
+        
+        <button class="button" id="-">-</button>
+        <button class="button" id="÷">÷</button>
+        <button class="button" id="0">0</button>
+        <button class="button" id=".">.</button>
+        <button class="button" id="=">=</button>
+        
+      </div>
+    </div> --->
   </body>
 </html>
